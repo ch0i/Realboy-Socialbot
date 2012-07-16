@@ -336,7 +336,7 @@ class Database():
       return login
     else:
       login = DBLogin(username,password)
-      session.save(login)
+      session.add(login)
       return login
   
   def findLogin(self, username):
@@ -367,7 +367,7 @@ class Database():
       return tweet
     else:
       tweet = DBTweet(tid,text,user,created_at_in_seconds)
-      session.save(tweet)
+      session.add(tweet)
       return tweet
     
   def findOrCreateByUsername(self,username,password=''):
@@ -376,7 +376,7 @@ class Database():
       return user
     else:
       user = DBUser(username,password)
-      session.save(user)
+      session.add(user)
       self.flush()
       return user
       
@@ -406,7 +406,7 @@ class Database():
       edge.kind = kind
       user1.edge_count = user1.edge_count + 1
       user2.edge_count = user2.edge_count + 1
-      session.save(edge) # we don't flush edges here, because it gives us a huge speedup to do a bunch at once then flush.
+      session.add(edge) # we don't flush edges here, because it gives us a huge speedup to do a bunch at once then flush.
       return edge
   
   def findRealboyByUsername(self, username):
@@ -427,7 +427,7 @@ class Database():
         return realboy
       else:
         realboy = DBRealboy(username,password)
-        session.save(realboy)
+        session.add(realboy)
         self.flush()
         return realboy
   
@@ -443,7 +443,7 @@ class Database():
       return realboy_friend
     else:
       realboy_friend = DBRealboyFriend(realboy,user)
-      session.save(realboy_friend)
+      session.add(realboy_friend)
       return realboy_friend
       
   def flush(self):
